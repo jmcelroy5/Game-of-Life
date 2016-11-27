@@ -1,3 +1,22 @@
 .App {
   padding: 1em;
+  color: white;
+  font-weight: bold;
+}
+
+body {
+	background-image: radial-gradient(#cc4444, #111111);
+}
+
+.App-gameContainer {
+	justify-content: center;
+	padding: 20px;
+}
+
+.App-boardContainer {
+	padding: 20px;
+	width: 500px;
+	height: 500px;
+	background-color: gray;
+	margin: 0 auto;
 }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import GameControls from './GameControls.js'
 import Board from './Board.js'
 import './App.css';
@@ -121,19 +121,23 @@ class App extends Component {
   render () {
     return (
       <div className="App">
-        <Board
-          matrix={this.state.matrix}
-          onChange={this.onBoardClick.bind(this)}
-          width={BOARD_WIDTH}
-          height={BOARD_HEIGHT}
-          cellSize={CELL_SIZE}
-        /><br />
+        <div className="App-gameContainer">
             <GameControls 
               onGameStart={this.onGameStart}
               onGamePause={this.onGamePause}
               onBoardClear={this.onBoardClear}
               generation={this.state.generation}
             />
+            <div className="App-boardContainer">
+              <Board
+                matrix={this.state.matrix}
+                onChange={this.onBoardClick.bind(this)}
+                width={BOARD_WIDTH}
+                height={BOARD_HEIGHT}
+                cellSize={CELL_SIZE}
+              />
+            </div>
+        </div>
       </div>
     )
   }
