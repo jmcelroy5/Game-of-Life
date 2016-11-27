@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import GameControls from './GameControls.js'
 import Board from './Board.js'
 import './App.css';
 
@@ -113,17 +114,13 @@ class App extends Component {
     }, INTERVAL)
   }
 
+  onGamePause () {
+    clearInterval(this.interval)
+  }
+
   render () {
     return (
       <div className="App">
-        <h1>Game of Life</h1>
-        <h3>Rules</h3>
-        <ul>
-          <li>Any live cell with &lt; 2 live neighbours dies, as if caused by under-population.</li>
-          <li>Any live cell with 2-3 live neighbours lives on to the next generation.</li>
-          <li>Any live cell with &gt; 3 live neighbours dies, as if by over-population.</li>
-          <li>Any dead cell with exactly 3 live neighbours becomes a live cell, as if by reproduction.</li>
-        </ul>
         <Board
           matrix={this.state.matrix}
           onChange={this.onBoardClick.bind(this)}
@@ -131,9 +128,12 @@ class App extends Component {
           height={BOARD_HEIGHT}
           cellSize={CELL_SIZE}
         /><br />
-        <button onClick={this.onGameStart.bind(this)}>Start</button>
-        <button onClick={this.onBoardClear.bind(this)}>Clear</button>
-        <p>Generation: {this.state.generation}</p>
+            <GameControls 
+              onGameStart={this.onGameStart}
+              onGamePause={this.onGamePause}
+              onBoardClear={this.onBoardClear}
+              generation={this.state.generation}
+            />
       </div>
     )
   }

@@ -1,0 +1,21 @@
+.GameControls {
+	padding: 10px;
+	width: 340px;
+	margin: 0 auto;
+}
+
+.GameControls-btn {
+	margin-right: 10px;
+	color: white;
+	border: 1px solid white;
+	border-radius: 10%;
+	background-color: black;
+	font-size: 24px;
+	width: 100px;
+}
+
+.GameControls-generation {
+	text-align: center;
+	font-size: 24px;
+	margin-bottom: 10px;
+}
