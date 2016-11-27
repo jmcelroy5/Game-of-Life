@@ -24,7 +24,7 @@ class Board extends Component {
 	}
 
 	componentWillReceiveProps (props) {
-		this.updateBoard(this.props.matrix)
+		this.updateBoard(props)
 	}
 
 	drawGridLines () {
