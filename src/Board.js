@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import './Board.css';
 
-var ALIVE_COLOR = 'yellow'
-, DEAD_COLOR = 'grey'
+var FIRST_GEN_COLOR = '#c57575'
+, SURVIVOR_COLOR = '#ee4444'
 
 class Board extends Component {
 	static propTypes = {
@@ -19,7 +19,6 @@ class Board extends Component {
 		this.context = this.canvas.getContext('2d')
 
 		this.context.strokeStyle = 'white'
-		this.context.fillStyle = ALIVE_COLOR
 
 		this.drawGridLines()
 	}
@@ -48,8 +47,11 @@ class Board extends Component {
 		this.wipeBoard()
 
 		const aliveCells = this.props.matrix.forEach((row) => {
-			const aliveCells = row.filter((cell) => cell.alive)
-			aliveCells.forEach(this.fillSquare.bind(this))
+			row.filter((cell) => cell.alive)
+				.forEach((cell) => {
+					const cellColor = cell.alive > 1 ? SURVIVOR_COLOR : FIRST_GEN_COLOR
+					this.fillSquare({x: cell.x, y: cell.y}, cellColor)
+				})
 		})
 	}
 
@@ -58,9 +60,10 @@ class Board extends Component {
 		this.context.stroke()
 	}
 
-	fillSquare (index) {
-		const xCanvas = index.x * this.props.cellSize
-		const yCanvas = index.y * this.props.cellSize
+	fillSquare ({x, y}, color) {
+		this.context.fillStyle = color
+		const xCanvas = x * this.props.cellSize
+		const yCanvas = y * this.props.cellSize
 		this.context.fillRect(xCanvas, yCanvas, this.props.cellSize, this.props.cellSize)
 	}
 

@@ -42,8 +42,14 @@ class App extends Component {
     return prev.map((row) => {
       return row.map((cell) => {
         const n = this.checkNeighbors(cell.x, cell.y, previousGen)
-        if (cell.alive && n !== 2 && n !== 3) cell.alive = false
-        else if (!cell.alive && n === 3) cell.alive = true
+        if (cell.alive > 0) {
+          if (n === 2 || n === 3) cell.alive += 1
+          else cell.alive = 0
+        }
+        else if (n === 3) {
+          cell.alive = 1
+        }
+        else cell.alive = 0
         return cell
       })
     })
@@ -81,7 +87,7 @@ class App extends Component {
     const {matrix} = this.state
     // toggle the active state
     const {alive} = matrix[index.x][index.y]
-    matrix[index.x][index.y].alive = !alive
+    matrix[index.x][index.y].alive = !!alive ? 0 : 1
     this.setState({matrix})
   }
 
@@ -90,7 +96,8 @@ class App extends Component {
     clearInterval(this.interval)
     const empty = this.state.matrix.map((row) => {
       return row.map((cell) => {
-        return {...cell, alive: false}
+        cell.alive = 0
+        return cell
       })
     })
     this.setState({matrix: empty, generation: 0})
