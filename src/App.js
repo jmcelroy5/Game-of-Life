@@ -92,8 +92,7 @@ class App extends Component {
     this.setState({matrix})
   }
 
-  onBoardClear () {
-    console.log('clearing...')
+  onGameReset () {
     clearInterval(this.interval)
     const empty = this.state.matrix.map((row) => {
       return row.map((cell) => {
@@ -123,9 +122,9 @@ class App extends Component {
       <div className="App">
         <div className="App-gameContainer">
             <GameControls 
-              onGameStart={this.onGameStart}
-              onGamePause={this.onGamePause}
-              onBoardClear={this.onBoardClear}
+              onGameStart={this.onGameStart.bind(this)}
+              onGamePause={this.onGamePause.bind(this)}
+              onGameReset={this.onGameReset.bind(this)}
               generation={this.state.generation}
             />
             <div className="App-boardContainer">
@@ -137,6 +136,7 @@ class App extends Component {
                 cellSize={CELL_SIZE}
               />
             </div>
+          <div></div>
         </div>
       </div>
     )

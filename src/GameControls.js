@@ -6,23 +6,23 @@ export default class GameControls extends Component {
 		generation: PropTypes.number
 	, onGameStart: PropTypes.func
 	, onGamePause: PropTypes.func
-	, onBoardClear: PropTypes.func
+	, onGameReset: PropTypes.func
 	}
 
 	static defaultProps = {
 		generation: 0
 	, onGameStart: () => {}
 	, onGamePause: () => {}
-	, onBoardClear: () => {}
+	, onGameReset: () => {}
 	}
 
 	render () {
-		const {onGameStart, onGamePause, onBoardClear, generation} = this.props
+		const {onGameStart, onGamePause, onGameReset, generation} = this.props
 
 		return (<div className="GameControls">
 		  <button className="GameControls-btn" onClick={onGameStart}>Run</button>
 		  <button className="GameControls-btn" onClick={onGamePause}>Pause</button>
-		  <button className="GameControls-btn"onClick={onBoardClear}>Clear</button>
+		  <button className="GameControls-btn"onClick={onGameReset}>Reset</button>
 		  <p className="GameControls-generation">Generation: {generation}</p>
 		</div>)
 	}
